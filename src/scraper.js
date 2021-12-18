@@ -9,7 +9,7 @@ exports.getProduct = async function (url) {
 
 	const page = await browser.newPage();
 	await page.setUserAgent(userAgent);
-	await page.goto(url, { waitUntil: 'networkidle2' });
+	await page.goto(url, { waitUntil: 'domcontentloaded' });
 
 	for (const field of config.fields) {
 		const element = await page.$(field.selector);
