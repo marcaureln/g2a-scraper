@@ -2,12 +2,18 @@ require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
+const morgan = require('morgan');
+const path = require('path');
+const fs = require('fs');
+
 const app = express();
 const scraper = require('./scraper');
+const accessLogStream = fs.createWriteStream(path.join(process.env.LOG_DIR, 'requests.log'), { flags: 'a' });
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(morgan('tiny', { stream: accessLogStream }));
 
 app.get('/', (req, res) => {
 	res.send('hello world !');
