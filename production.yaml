@@ -1,0 +1,34 @@
+version: '3.9'
+
+services:
+  app:
+    build: .
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - BROWSER_WS_ENDPOINT=ws://chrome:3000
+      - LOG_DIR=/app/logs
+    command: npm run dev
+    depends_on:
+      - chrome
+  
+  chrome:
+    image: browserless/chrome
+    restart: always
+    environment:
+      - MAX_CONCURRENT_SESSIONS=10
+      - DEFAULT_BLOCK_ADS=true
+      - PREBOOT_CHROME=true
+      - KEEP_ALIVE=true
+      - PROXY_HOST=tor
+      - PROXY_PORT=8118
+    depends_on:
+      - tor-proxy
+  
+  tor-proxy:
+    image: rdsubhas/tor-privoxy-alpine
+    restart: always
+    ports:
+      - "8118:8118"
+      - "9050:9050"
