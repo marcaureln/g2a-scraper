@@ -1,7 +1,7 @@
 {
 	"name": "g2a-scraper",
 	"version": "1.0.0",
-	"description": "A G2A.com web scraper drived by a Rest API",
+	"description": "API Scraper for G2A.com",
 	"main": "src/server.js",
 	"private": true,
 	"scripts": {
