@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   app:
-    build: marcaureln/g2a-scraper
+    image: marcaureln/g2a-scraper
     restart: always
     ports:
       - "8080:8080"
